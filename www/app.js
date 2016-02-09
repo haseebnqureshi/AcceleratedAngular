@@ -1,12 +1,8 @@
 (function() {
 
 	jQuery(function($) {
-
 		$(document).foundation();
-
 	});
-
-	window.endpoint = 'http://192.168.80.80:8080/v1';
 
 	window.app = angular.module('appPublic', ['ngRoute', 'ngCookies', 'ngAnimate']);
 	

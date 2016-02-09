@@ -1,12 +1,12 @@
 {
-  "name": "accelerated",
+  "name": "accelerated-angular",
   "version": "1.0.0",
   "authors": [
     "Haseeb Qureshi <haseeb.n.qureshi@gmail.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/haseebnqureshi/Accelerated.git"
+    "url": "https://github.com/haseebnqureshi/AcceleratedAngular.git"
   },
   "private": true,
   "license": "MIT",

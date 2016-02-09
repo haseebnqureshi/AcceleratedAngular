@@ -143,7 +143,8 @@
 					method: method,
 					url: window.endpoint + resource,
 					dataType: 'json',
-					data: data || {},
+					contentType: 'application/json',
+					data: JSON.stringify(data || {}),
 					headers: this.headers(),
 					success: function(data, textStatus, xhr) {
 						if (success) { success(data, textStatus, xhr); }

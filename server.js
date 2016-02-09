@@ -5,35 +5,32 @@ Dependencies
 
 var express = require('express');
 var app = express();
-var config = require('./config.js')();
-var models = require('./models')(config);
+
+
 
 /*------
-Conditional Initializing
+Loading env.json
 ------------*/
 
-process.argv.forEach(function(val, index, array) {
-	if (index == 2 && val == 'setup') { 
-		for (var i in models) {
-			if (models[i]._init) {
-				models[i]._init();
-			}
-		}
-	}
-});
+require('./env')(__dirname + '/env.json', __dirname + '/www/env.js');
+
+
 
 /*------
 Middleware & Routes
 ------------*/
 
-app.set('rootPath', __dirname);
-app = require('./middleware')(express, app, config, models);
-app = require('./routes')(express, app, config, models);
+app.use('/', express.static(__dirname + '/www'));
+app.use('/*', function(req, res) {
+	return res.status(200).sendFile(__dirname + '/www/index.html');
+});
+
+
 
 /*------
 Server
 ------------*/
 
-app.listen(config.APP_PORT, function() {
-	console.log('Running on port ' + config.APP_PORT);
+app.listen(process.env.EXPRESS_PORT, function() {
+	console.log('Accelerated/Angular running on port ' + process.env.EXPRESS_PORT);
 });

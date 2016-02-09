@@ -185,11 +185,22 @@
 		return this;
 	}]);
 
-	window.app.factory('accUser', ['accAuthAjax', function(ajax) {
+	window.app.factory('accUser', ['accAuthAjax', 'accAuth', function(ajax, accAuth) {
 		var that = this;
 
 		this.get = function(success, error, done) {
-			ajax.get('/user', success || null, error || null, done || null);
+			ajax.get('/user', function(user) {
+
+				/* IMPORTANT: GETTING USER INFORMATION AND STORING */
+
+				if (user != null) {
+					accAuth.setAuth('user', user);
+				}
+				accAuth.persistAuth();
+
+				if (success) { success(user); }
+
+			}, error || null, done || null);
 		};
 
 		this.put = function(data, success, error, done) {
@@ -403,6 +414,5 @@
 
 		return this;
 	}]);
-
 
 })();
